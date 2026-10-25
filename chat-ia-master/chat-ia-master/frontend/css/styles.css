@@ -1,0 +1,489 @@
+
+/* ==================================================
+   BEAUTYMATCH - ESTILOS GENERALES
+   Estética: Editorial Chic
+   Colores: bordó, marfil, negro y rosa suave
+   ================================================== */
+
+/* 1. Configuración general */
+
+:root {
+    --burgundy: #76283f;
+    --burgundy-dark: #592033;
+    --ivory: #fffdf9;
+    --soft-pink: #f4e8eb;
+    --taupe: #8d777b;
+    --text: #292326;
+    --muted: #82777b;
+    --border: #eadfe2;
+    --surface: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--ivory);
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* 2. Estructura principal */
+
+.app {
+    display: flex;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--ivory);
+}
+
+/* 3. Barra lateral */
+
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: #21191c;
+    color: white;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    letter-spacing: 0.4px;
+}
+
+.new-chat {
+    padding: 12px;
+    border: 1px solid #66525a;
+    border-radius: 8px;
+    color: white;
+    background: transparent;
+    text-align: left;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.new-chat:hover {
+    background: #39282f;
+    border-color: #b17a8d;
+}
+
+.sidebar-label {
+    color: #c1afb5;
+    font-size: 13px;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    color: #c1afb5;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* 4. Área principal del chat */
+
+.chat {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--border);
+    background: var(--ivory);
+}
+
+.chat-header h1 {
+    font-size: 17px;
+    margin-bottom: 4px;
+    color: var(--burgundy-dark);
+}
+
+.status {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.avatar,
+.welcome-icon {
+    display: grid;
+    place-items: center;
+    background: var(--soft-pink);
+    color: var(--burgundy);
+    border-radius: 50%;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+/* 5. Área de mensajes */
+
+.messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 32px max(24px, calc((100% - 760px) / 2));
+    scroll-behavior: smooth;
+}
+
+.welcome {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+}
+
+.welcome-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 30px;
+}
+
+.welcome h2 {
+    font-size: 26px;
+    color: var(--burgundy-dark);
+}
+
+.welcome p {
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 420px;
+}
+
+/* Mensajes del usuario y de BeautyMatch */
+
+.message {
+    max-width: 85%;
+    width: fit-content;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-radius: 18px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.message.user {
+    margin-left: auto;
+    background: var(--soft-pink);
+    color: #39252d;
+    border-bottom-right-radius: 5px;
+}
+
+.message.assistant {
+    margin-right: auto;
+    background: #f8f5f4;
+    color: var(--text);
+    border: 1px solid #f0e9e8;
+    border-bottom-left-radius: 5px;
+}
+
+/* 6. Galería de recomendaciones */
+
+.beautymatch-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    margin: 8px 0 24px;
+}
+
+.beautymatch-gallery h3 {
+    grid-column: 1 / -1;
+    margin: 0 0 4px;
+    color: var(--burgundy-dark);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/* Tarjeta individual */
+
+.beautymatch-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px #39252d0a;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.beautymatch-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px #39252d14;
+}
+
+/* Imagen de cada estilo */
+
+.beautymatch-image-link {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+    background: #f2e7e9;
+    text-decoration: none;
+}
+
+.beautymatch-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.beautymatch-card:hover img {
+    transform: scale(1.04);
+}
+
+/* Alternativa cuando la imagen no carga */
+
+.beautymatch-image-link.image-unavailable {
+    display: grid;
+    place-items: center;
+    min-height: 120px;
+    padding: 14px;
+    color: var(--burgundy);
+    background: var(--soft-pink);
+    text-align: center;
+    font-size: 13px;
+}
+
+/* Título y enlace de cada recomendación */
+
+.beautymatch-card h4 {
+    margin: 12px 11px 9px;
+    color: var(--burgundy-dark);
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.beautymatch-search-link {
+    display: inline-block;
+    margin: 0 11px 13px;
+    color: var(--burgundy);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.beautymatch-search-link:hover {
+    color: var(--burgundy-dark);
+    text-decoration: underline;
+}
+
+/* 7. Formulario de entrada */
+
+.chat-form {
+    display: flex;
+    gap: 12px;
+    width: min(800px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 8px;
+    border: 1px solid #e3d5d9;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 3px 15px #39252d0a;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.chat-form:focus-within {
+    border-color: #b67b8e;
+    box-shadow: 0 3px 18px #76283f12;
+}
+
+.chat-form input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    padding: 12px;
+    color: var(--text);
+    background: transparent;
+}
+
+.chat-form input::placeholder {
+    color: #a19498;
+}
+
+.chat-form button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: var(--burgundy);
+    color: white;
+    transition: background 0.2s;
+}
+
+.chat-form button:hover {
+    background: var(--burgundy-dark);
+}
+
+/* Texto aclaratorio debajo del formulario */
+
+.disclaimer {
+    padding: 14px 12px 18px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* 8. Accesibilidad */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+}
+
+/* 9. Adaptación a tablets */
+
+@media (max-width: 900px) {
+    .sidebar {
+        width: 220px;
+    }
+
+    .messages {
+        padding: 26px 22px;
+    }
+
+    .beautymatch-gallery {
+        gap: 10px;
+    }
+
+    .beautymatch-card h4 {
+        font-size: 13px;
+    }
+}
+
+/* 10. Adaptación a celulares */
+
+@media (max-width: 600px) {
+    .sidebar {
+        display: none;
+    }
+
+    .chat-header {
+        padding: 14px 18px;
+    }
+
+    .messages {
+        padding: 24px 16px;
+    }
+
+    .welcome h2 {
+        font-size: 22px;
+    }
+
+    .welcome p {
+        font-size: 14px;
+    }
+
+    .message {
+        max-width: 94%;
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+
+    /* Las recomendaciones se muestran en una columna. */
+    .beautymatch-gallery {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .beautymatch-gallery h3 {
+        font-size: 16px;
+    }
+
+    /* Tarjetas horizontales para aprovechar el espacio. */
+    .beautymatch-card {
+        display: grid;
+        grid-template-columns: 120px minmax(0, 1fr);
+        align-items: center;
+    }
+
+    .beautymatch-card .beautymatch-image-link {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        height: 100%;
+        min-height: 110px;
+    }
+
+    .beautymatch-card img {
+        width: 100%;
+        height: 100%;
+        min-height: 110px;
+        aspect-ratio: auto;
+    }
+
+    .beautymatch-card h4 {
+        align-self: end;
+        margin: 10px 10px 6px;
+    }
+
+    .beautymatch-search-link {
+        align-self: start;
+        margin: 0 10px 10px;
+    }
+
+    .chat-form {
+        width: calc(100% - 24px);
+        gap: 6px;
+    }
+
+    .chat-form input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .chat-form button {
+        padding: 11px 13px;
+    }
+
+    .disclaimer {
+        padding: 10px 8px 14px;
+        font-size: 11px;
+    }
+}
+
+/* 11. Preferencia de movimiento reducido */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
