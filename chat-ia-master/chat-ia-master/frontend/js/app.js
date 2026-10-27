@@ -4,7 +4,7 @@ const chatForm = document.getElementById("chat-form");
 const messageInput = document.getElementById("message-input");
 const messagesContainer = document.getElementById("messages");
 const newChatButton = document.getElementById("new-chat");
-
+const api_url = "https://beauty-backend-silk.vercel.app/api/chat";
 let conversationHistory = [];
 
 // Imágenes de referencia separadas por categoría.
