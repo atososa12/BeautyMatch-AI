@@ -1,39 +1,35 @@
+
 require("dotenv").config();
-//importamos Express
+
 const express = require("express");
 const cors = require("cors");
-
-//importamos las rutas del chat
 const chatRoutes = require("./routes/chat.routes");
 
-//creamos nuestra aplicación
+// Crear aplicación
 const app = express();
 
-const PORT = 3000;
-
-// Permitir peticiones desde el frontend- Configuración de CORS
+// Configuración de middleware
 app.use(cors());
-
-//le dice a Express que pueda recibir información en formato JSON
 app.use(express.json());
-/* Por ejemplo, si recibimos un POST con el siguiente cuerpo:
-{
-    "message": "¿Qué es JavaScript?"
-} 
-el backend podrá leerlo
-*/
 
-// Rutas
+// Rutas del chatbot
 app.use("/api/chat", chatRoutes);
 
-// Ruta inicial
+// Ruta principal para comprobar el funcionamiento
 app.get("/", (req, res) => {
     res.json({
         message: "Backend Chat IA funcionando"
     });
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
-});
+// Iniciar servidor cuando se ejecuta localmente
+if (require.main === module) {
+    const PORT = process.env.PORT || 3000;
+
+    app.listen(PORT, () => {
+        console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
+    });
+}
+
+// Exportar la aplicación para Vercel
+module.exports = app;
