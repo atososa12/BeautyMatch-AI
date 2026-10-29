@@ -4,6 +4,8 @@ const chatForm = document.getElementById("chat-form");
 const messageInput = document.getElementById("message-input");
 const messagesContainer = document.getElementById("messages");
 const newChatButton = document.getElementById("new-chat");
+
+// URL del backend publicado en Vercel
 const api_url = "https://beauty-backend-silk.vercel.app/api/chat";
 
 let conversationHistory = [];
@@ -94,7 +96,6 @@ function parseRecommendations(text) {
 
   const recommendations = [];
 
-  // Reconoce las opciones aunque Gemini las devuelva en una sola línea.
   const optionRegex =
     /(?:^|\n)\s*(?:✨\s*)?(?:Opción|Opcion)\s*([1-3])\s*[:.)-]\s*/gi;
 
@@ -126,11 +127,10 @@ function parseRecommendations(text) {
         title = lines[0].replace(/^#+\s*/, "").trim();
         description = lines.slice(1).join(" ");
       } else {
-        // Si todo viene en una sola línea, intenta separar el título
-        // de la descripción usando los comienzos habituales de una frase.
         const oneLine = section.replace(/\s+/g, " ").trim();
+
         const split = oneLine.match(
-          /^(.{3,65}?)\s+(?=(?:Unas|Una|Un|Una piel|El|La|Los|Las|Este|Esta|Para|Con|Llevá|Lleva|Elegí|Elige)\b)/i
+          /^(.{3,65}?)\s+(?=(?:Unas|Una|Un|El|La|Los|Las|Este|Esta|Para|Con|Llevá|Lleva|Elegí|Elige)\b)/i
         );
 
         if (split) {
@@ -138,6 +138,7 @@ function parseRecommendations(text) {
           description = oneLine.slice(split[0].length).trim();
         } else {
           const firstSentence = oneLine.match(/^(.{3,65}?)[.!?]\s+(.+)$/);
+
           if (firstSentence) {
             title = firstSentence[1].trim();
             description = firstSentence[2].trim();
@@ -282,12 +283,14 @@ function findPreviousRecommendations() {
 
 async function sendMessage(message) {
   const photoRequest = isPhotoRequest(message);
+
   const previousRecommendations = photoRequest
     ? findPreviousRecommendations()
     : [];
 
   try {
-    const response = await fetch("http://localhost:3000/api/chat", {
+    // Se conecta al backend de Vercel, no a localhost.
+    const response = await fetch(api_url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -332,6 +335,7 @@ async function sendMessage(message) {
       { role: "user", content: message },
       { role: "assistant", content: answer }
     );
+
   } catch (error) {
     console.error("Error al comunicarse con el backend:", error);
 
@@ -342,7 +346,7 @@ async function sendMessage(message) {
     }
 
     addMessage(
-      "No se pudo conectar con el servidor. Verificá que el backend esté iniciado e intentá nuevamente.",
+      "No se pudo conectar con el servidor. Verificá la conexión e intentá nuevamente.",
       "assistant"
     );
   }
